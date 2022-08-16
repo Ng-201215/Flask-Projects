@@ -1,0 +1,26 @@
+<!DOCTYPE html>   
+<html>   
+<head>  
+    <style>
+table, th, td {
+  border: 1px solid black;
+}
+
+Body 
+{  
+  font-family: Calibri, Helvetica, sans-serif;  
+  background-color: MediumTurquoise;
+}
+
+</style>
+</head>    
+<body>      
+            <center><h1 style="color:brown;"><i> Trendlines page of {{tr.name}} tracker </i></h1></center> 
+            <center><img src="data:image/png;base64, {{ plot_url }}" height="600"></center>
+            <br>
+            <button onclick="location.href='/{{users.login_id}}/home/{{tr.name}}';" id="myButton" class="float-left submit-button">GO BACK</button>
+            
+</body>     
+</html> 
+
+

@@ -1,0 +1,98 @@
+<!DOCTYPE html>   
+<html>   
+<head>  
+    <style>
+
+Body 
+{  
+  font-family: Calibri, Helvetica, sans-serif;  
+  background-color: PaleTurquoise;
+}  
+
+button {   
+       background-color: burlywood;   
+       width: 100%;  
+        color: black;   
+        padding: 15px;   
+        margin: 10px 0px;   
+        border: none;   
+        cursor: pointer;   
+         }   
+
+ button:hover {   
+        opacity: 0.7;   
+    }   
+     
+ .container {   
+        padding: 25px;   
+        background-color: lightblue;  
+    }  
+ 
+table, th, td {
+  border: 1px solid black;
+}
+
+.alert-error {
+  padding: 12px;
+  border-radius: 3px;
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+  border: 2px solid darkred;
+  background-color: red;
+  color: white;
+}
+
+.alert-info {
+  padding: 12px;
+  border-radius: 3px;
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+  border: 2px solid orange;
+  background-color: yellow;
+  color: black;
+}
+
+</style>
+</head>    
+<body>      
+            {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                <center><span style="font-size: 150%"> {{ message }} </span><center>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}  
+
+            <center><h1 style="border:orangered; border-width:3px; border-style:solid;"> <b> hello , {{users.username}} welcome to tracker app !! </b> </h1> </center> 
+          <a href='/' style="float:right">Logout</a>
+     
+            <br>
+            <center><h1 style="color: red;"><i><b><u>HOMEPAGE</u></b></i></h1></center>
+            {% if tr|length==0%}
+            <p>No tracker found.Add the tracker now!</p>
+            <br>
+            {% else %}
+            <br>
+            <table style="width:100%">
+            <tr><th> Tracker Name </th><th> New event </th><th>Options</th><th> Tracker Page</th></tr>
+            {% for row in tr %}
+            <tr>
+                <td>{{row.name}}</td>
+                <td><a href="/{{users.login_id}}/home/{{row.name}}/addlogs">add event</a></td>
+                <td>
+                <select name="links" onchange="window.location.href=this.value;">
+                <option>--</option>
+                <option value="/{{users.login_id}}/home/update/{{row.name}}">Update</option>
+                <option value="/{{users.login_id}}/home/delete/{{row.name}}">Delete</option>
+                </select>
+                </td>
+                <td><button onclick="location.href = '/{{users.login_id}}/home/{{row.name}}';" id="myButton" class="float-left submit-button" >check</button></td>
+            </tr>
+            {% endfor %}
+             </table>
+            {% endif %}   
+            <center><a href="/addtracker/{{users.login_id}}">ADD NEW TRACKER</a></center>
+</body>     
+</html> 

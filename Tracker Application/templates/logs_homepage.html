@@ -1,0 +1,80 @@
+<!DOCTYPE html>   
+<html>   
+<head>  
+    <style>
+Body 
+{  
+  font-family: Calibri, Helvetica, sans-serif;  
+  background-color: PaleTurquoise;
+}  
+
+button {   
+       background-color: burlywood;   
+       width: 100%;  
+        color: black;   
+        padding: 15px;   
+        margin: 10px 0px;   
+        border: none;   
+        cursor: pointer;   
+         }   
+
+ button:hover {   
+        opacity: 0.7;   
+    }
+
+  .cancelbtn {   
+        width: auto;   
+        padding: 10px 18px;  
+        margin: 10px 5px;  
+    }   
+        
+     
+ .container {   
+        padding: 25px;   
+        background-color: lightblue;  
+    }  
+ 
+table, th, td {
+  border: 1px solid black;
+}
+
+</style>
+</head>    
+<body>      
+            <center><h1 style="color: forestgreen;"><i>Homepage of {{tr.name}} Tracker</i></h1></center> 
+            <br>
+            <h4 style="color: blueviolet;"><u>Tracker Name</u> : {{tr.name}}</h5>
+            <h4 style="color: blueviolet;"><u>Tracker Description</u> : {{tr.description}}</h5>
+            <h4 style="color: blueviolet;"><u>Tracker Type :</u> {{tr.ttype}}</h5>
+            {% if llist|length==0 %}
+            <p>No data found.Track now!</p>
+            <br>
+            {% else %}
+            <br>
+            <table style="width:100%">
+            <tr><th> Time </th><th> Value </th><th> Notes </th><th> Options </th><th>logid</th></tr>
+            {% for row in llist %}
+            <tr>
+                <td>{{row.time}}</td><td>{{row.value}}</td><td>{{row.extra}}</td>
+                <td>
+                <select name="links" onchange="window.location.href=this.value;">
+                <option>--</option>
+                <option value="/{{users.login_id}}/home/{{tr.name}}/{{row.logid}}/update">Update Log</option>
+                <option value="/{{users.login_id}}/home/{{tr.name}}/{{row.logid}}/delete">Delete Log</option>
+                </select>
+                </td>
+                <td>{{row.logid}}</td>
+            </tr>
+            {% endfor %}
+             </table>
+            {% endif %}   
+            <br><br>
+            <a href="/{{users.login_id}}/home/{{tr.name}}/addlogs">ADD A NEW LOG </a>
+            <br><br>
+            <a href="/{{users.login_id}}/home/{{tr.name}}/trendline"> SHOW TRENDLINES </a>
+            <br><br>
+            <a href='/{{users.username}}/home'>GO TO HOMEPAGE</a>
+
+</body>     
+
+</html> 

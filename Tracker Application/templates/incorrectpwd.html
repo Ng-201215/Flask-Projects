@@ -1,0 +1,47 @@
+<!DOCTYPE html>   
+<html>   
+<head>  
+    <style>
+
+Body 
+{  
+  font-family: Calibri, Helvetica, sans-serif;  
+  background-color: pink;
+}  
+ 
+.alert-error {
+  padding: 12px;
+  border-radius: 3px;
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+  border: 2px solid darkred;
+  background-color: red;
+  color: white;
+}
+
+.alert-info {
+  padding: 12px;
+  border-radius: 3px;
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+  border: 2px solid orange;
+  background-color: yellow;
+  color: black;
+}
+
+</style>
+</head>    
+<body>      
+            {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                <center><span style="font-size: 200%"> {{ message }} </span><center>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}  
+
+<a href="/">Go Back to Login Page</a>
+</body>     
+</html> 
